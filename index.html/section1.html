@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Books</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ab75b9;
+            color: #333;
+        }
+        header {
+            background-color: #ffeb3b;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            margin-right: 10px;
+        }
+        .search-logo {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .search-input {
+            display: none;
+            margin-left: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: all 0.3s ease;
+        }
+        .search-results {
+            display: none;
+            position: absolute;
+            top: 60px; /* Adjust based on header height */
+            left: 20px;
+            right: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            max-height: 400px;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+        .search-results ul {
+            list-style: none;
+        }
+        .search-results ul li {
+            margin-bottom: 10px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav ul li a.active,
+        nav ul li a:hover {
+            background-color: #4caf50;
+            color: white;
+            border-radius: 5px;
+        }
+        main {
+            padding: 20px;
+        }
+        .identity-box,
+        .subject-box {
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+        .identity-box:hover,
+        .subject-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(248, 247, 247, 0.2);
+        }
+        .identity-box h2,
+        .subject-box h3 {
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            margin-top: 20px;
+            text-align: left;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        .hidden-topics {
+            display: none;
+        }
+        .see-more {
+            display: block;
+            margin-top: 20px;
+            text-align: right;
+            color: #4caf50;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .see-more:hover {
+            color: #388e3c;
+        }
+        .subjects {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        footer {
+            background-color: #ffeb3b;
+            padding: 20px;
+            text-align: center;
+        }
+        footer .see-more-footer {
+            text-decoration: none;
+            color: #4caf50;
+            font-weight: bold;
+        }
+        /* Buttons for Read and Watch */
+        .btn-group {
+            margin-top: 10px;
+        }
+        .btn-read, .btn-watch {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .btn-read {
+            background-color: #4caf50;
+            color: white;
+        }
+        .btn-read:hover {
+            background-color: #388e3c;
+            transform: scale(1.05);
+        }
+        .btn-watch {
+            background-color: #f44336;
+            color: white;
+        }
+        .btn-watch:hover {
+            background-color: #d32f2f;
+            transform: scale(1.05);
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .subjects {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            LOGO
+            <span class="search-logo" aria-label="Toggle search">&#128269;</span>
+            <input type="text" class="search-input" placeholder="Search topics..." aria-label="Search input">
+        </div>
+        <nav role="navigation"><b>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="#" class="active">Subjects</a></li>
+                <li><a href="section2.html">Exam papers</a></li>
+                <li><a href="section3.html">Books</a></li>
+                <li><a href="section4.html">Videos</a></li>
+                <li><a href="section5.html">Contact us</a></li>
+            </ul>
+        </b>
+        </nav>
+        <div class="search-results">
+            <ul></ul>
+        </div>
+    </header>
+    <main>
+        <section class="subjects">
+            <!-- Repeat this div block for each subject box -->
+            <div class="subject-box">
+                <h3>General Medicine <span class="search-icon" aria-label="Search topics">&#128269;</span></h3>
+                <ul>
+                    <li><span style="color: #4caf50;">&gt;</span> Introduction <div class="btn-group"><a href="https://www.telegram.org/" target="_blank" class="btn-read">Read</a><a href="https://youtu.be/tgbNymZ7vqY" target="_blank" class="btn-watch">Watch</a></div></li>
+                    <li><span style="color: #4caf50;">&gt;</span> Physiology <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li><span style="color: #4caf50;">&gt;</span> Biochemistry <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li><span style="color: #4caf50;">&gt;</span> Pathology <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Pharmacology <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Microbiology <div class="btn-group"><button class="btn-read" onclick="window.open('https://www.telegram.org/', '_blank')">Read</button><button class="btn-watch" onclick="window.open('https://youtu.be/tgbNymZ7vqY', '_blank')">Watch</button></div></li>
+
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Forensic Medicine <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Community Medicine <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                </ul>
+                <span class="see-more" onclick="toggleSeeMore(this)" aria-expanded="false">Etc...</span>
+            </div>
+            <div class="subject-box">
+                <h3>Science <span class="search-icon" aria-label="Search topics">&#128269;</span></h3>
+                <ul>
+                    <li><span style="color: #4caf50;">&gt;</span> Physics <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li><span style="color: #4caf50;">&gt;</span> Chemistry <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li><span style="color: #4caf50;">&gt;</span> Biology <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li><span style="color: #4caf50;">&gt;</span> Earth Science <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Environmental Science <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Astronomy <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Zoology <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Botany <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                </ul>
+                <span class="see-more" onclick="toggleSeeMore(this)" aria-expanded="false">Etc...</span>
+            </div>
+            <div class="subject-box">
+                <h3>Mathematics <span class="search-icon" aria-label="Search topics">&#128269;</span></h3>
+                <ul>
+                    <li><span style="color: #4caf50;">&gt;</span> Algebra <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li><span style="color: #4caf50;">&gt;</span> Geometry <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li><span style="color: #4caf50;">&gt;</span> Calculus <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li><span style="color: #4caf50;">&gt;</span> Statistics <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Trigonometry <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Probability <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Number Theory <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Discrete Math <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                </ul>
+                <span class="see-more" onclick="toggleSeeMore(this)" aria-expanded="false">Etc...</span>
+            </div>
+            <div class="subject-box">
+                <h3>FINANCIAL ACCOUNTING <span class="search-icon" aria-label="Search topics">&#128269;</span></h3>
+                <ul>
+                    <li><span style="color: #4caf50;">&gt;</span> CREDIT <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li><span style="color: #4caf50;">&gt;</span> DEBIT <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li><span style="color: #4caf50;">&gt;</span> JOURNAL <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li><span style="color: #4caf50;">&gt;</span> BALANCE SHEET <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Pharma <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Microb <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Forensic <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                    <li class="hidden-topics"><span style="color: #4caf50;">&gt;</span> Community <div class="btn-group"><button class="btn-read">Read</button><button class="btn-watch">Watch</button></div></li>
+                </ul>
+                <span class="see-more" onclick="toggleSeeMore(this)" aria-expanded="false">Etc...</span>
+                </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 EduWebsite. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Site Map</a>
+        </div>
+    </footer>
+    <script>
+        function toggleSeeMore(element) {
+            const hiddenTopics = element.parentElement.querySelectorAll('.hidden-topics');
+            hiddenTopics.forEach(topic => {
+                topic.style.display = topic.style.display === 'none' ? 'list-item' : 'none';
+            });
+            element.textContent = element.textContent === 'Etc...' ? 'Etc...' : 'Etc...';
+            element.setAttribute('aria-expanded', element.textContent === 'Etc...');
+        }
+        const searchIcons = document.querySelectorAll('.search-logo, .search-icon');
+        const searchInput = document.querySelector('.search-input');
+        const searchResults = document.querySelector('.search-results');
+        const resultsList = searchResults.querySelector('ul');
+        searchIcons.forEach(icon => {
+            icon.addEventListener('click', () => {
+                if (searchInput.style.display === 'none' || searchInput.style.display === '') {
+                    searchInput.style.display = 'inline-block';
+                    searchInput.focus();
+                } else {
+                    searchInput.style.display = 'none';
+                    searchInput.value = '';
+                }
+            });
+        });
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            if (query.length > 0) {
+                const topics = document.querySelectorAll('.subject-box li, .identity-box li');
+                const matchingTopics = Array.from(topics).filter(topic => 
+                    topic.textContent.toLowerCase().includes(query)
+                );
+                resultsList.innerHTML = '';
+                if (matchingTopics.length > 0) {
+                    searchResults.style.display = 'block';
+                    matchingTopics.forEach(topic => {
+                        const resultItem = document.createElement('li');
+                        resultItem.innerHTML = topic.innerHTML;
+                        resultsList.appendChild(resultItem);
+                    });
+                } else {
+                    searchResults.style.display = 'none';
+                }
+            } else {
+                searchResults.style.display = 'none';
+                resultsList.innerHTML = '';
+            }
+        });
+        document.addEventListener('click', function(event) {
+            if (!searchInput.contains(event.target) && !searchResults.contains(event.target) && !event.target.classList.contains('search-icon')) {
+                searchResults.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

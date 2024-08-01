@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Section 2</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #a0b8e0;
+        }
+        .header {
+            background-color: #00796b;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            margin-right: 10px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+        }
+        nav ul li a.active,
+        nav ul li a:hover {
+            background-color: #004d40;
+            border-radius: 5px;
+        }
+        .filter-section {
+            margin: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .filter-section h3 {
+            margin-bottom: 20px;
+        }
+        .filter-section select {
+            margin-bottom: 10px;
+        }
+        .table-section {
+            margin: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .table-section table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table-section th, .table-section td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .table-section th {
+            background-color: #00796b;
+            color: white;
+        }
+        .table-section tr:hover {
+            background-color: #f1f1f1;
+        }
+        @media (max-width: 768px) {
+            .container-fluid {
+                flex-direction: column;
+            }
+            .filter-section, .table-section {
+                margin: 10px;
+            }
+        }
+        /* Added styles for extended features */
+        .filter-section label {
+            font-weight: bold;
+        }
+        .filter-section .btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <span>LOGO</span>
+        </div>
+        <nav role="navigation"><b>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="section1.html">Subjects</a></li>
+                <li><a href="#" class="active">Exam papers</a></li>
+                <li><a href="section3.html">Books</a></li>
+                <li><a href="section4.html">Videos</a></li>
+                <li><a href="section5.html">Contact us</a></li>
+            </ul>
+        </b>
+        </nav>
+    </header>
+    <div class="filter-section">
+        <h3>FILTER <i class="fas fa-filter"></i></h3>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="university">UNIVERSITY</label>
+                <select id="university" class="form-control">
+                    <option value="ALL">ALL</option>
+<option value="ou university">ou university</option>
+<option value="MG UNIVERSITY">MG UNIVERSITY</option>
+<option value="KL UNIVERSITY">KL UNIVERSITY</option>
+<option value="ABHINASH UNIVERSITY">ABHINASH UNIVERSITY</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="course">COURSE</label>
+                <select id="course" class="form-control">
+                    <option value="ALL">ALL</option>
+<option value="bcom">bcom </option>
+<option value="MCOM">MCOM</option>
+<option value="BSC">BSC</option>
+<option value="BTECH">BTECH</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="subject">SUBJECT</label>
+                <select id="subject" class="form-control">
+                    <option value="ALL">ALL</option>
+<option value="english">english </option>
+<option value="ECONOMICS">ECONOMICS</option>
+<option value="JAVA">JAVA</option>
+<option value="DATA SCIENCE">DATA SCIENCE</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="paper">PAPER</label>
+                <select id="paper" class="form-control">
+                    <option value="ALL">ALL</option>
+                    <option value="PAPER 1">PAPER 1</option>
+                    <option value="PAPER 2">PAPER 2</option>
+                </select>
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <button class="btn btn-success me-2" id="search-filter">Search Filter</button>
+                <button class="btn btn-danger" id="show-all-clear-filter">Show All / Clear Filter</button>
+            </div>
+            <div class="col-md-12 mt-3">
+                <input type="text" id="search-bar" class="form-control" placeholder="Search all items...">
+            </div>
+        </div>
+    </div>
+    <div class="table-section">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Updated on</th>
+                    <th>UNIVERSITY</th>
+                    <th>EXAM TYPE</th>
+                    <th>YEAR</th>
+                    <th>MONTH</th>
+                    <th>COURSE</th>
+                    <th>SUBJECT</th>
+                    <th>PAPER</th>
+                    <th>code</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <tr>
+                    <td>28 February 24</td>
+                    <td>ABHINASH UNIVERSITY</td>
+                    <td>MCET</td>
+                    <td>2024</td>
+                    <td>DECEMBER</td>
+                    <td>BTECH</td>
+                    <td>DATA SCIENCE</td>
+                    <td><a href="#">PAPER 1</td>
+                    <td>SHAIF</td>
+                    </tr>
+                    
+                <tr>
+                    <td>01 July 24</td>
+                    <td>ou university</td>
+                    <td>board exams</td>
+                    <td>2024</td>
+                    <td>june</td>
+                    <td>bcom</td>
+                    <td>english</td>
+                    <td><a href="https://hsquareblog.blogspot.com/2024/06/income-tax-impportant-questions-and.html">paper 1</a></td>
+                    <td>ght</td>
+                </tr>
+                <tr>
+                    <td>01 April 24</td>
+                    <td>KL UNIVERSITY</td>
+                    <td>DEGREE SEMESTER 1</td>
+                    <td>2023</td>
+                    <td>JANUARY</td>
+                    <td>BSC</td>
+                    <td>MATHS</td>
+                    <td><a href="#">PAPER 2</a></td>
+                    <td>E-CAT</td>
+                </tr>
+                <tr>
+                    <td>03 April 24</td>
+                    <td>MG UNIVERSITY</td>
+                    <td>DEGREE SEMESTER 1</td>
+                    <td>2022</td>
+                    <td>MAY</td>
+                    <td>MCOM</td>
+                    <td>ECONOMICS</td>
+                    <td><a href="#">PAPER 1</a></td>
+                    <td>E-266</td>
+                </tr>
+                <tr>
+                    <td>01 July 24</td>
+                    <td>ou university</td>
+                    <td>board exams</td>
+                    <td>2024</td>
+                    <td>june</td>
+                    <td>MCOM</td>
+                    <td>english</td>
+                    <td><a href="#">paper 1</a></td>
+                    <td>ght</td>
+                </tr>
+                <tr>
+                    <td>01 April 24</td>
+                    <td>KL UNIVERSITY</td>
+                    <td>DEGREE SEMESTER 3</td>
+                    <td>2023</td>
+                    <td>JANUARY</td>
+                    <td>BSC</td>
+                    <td>JAVA</td>
+                    <td><a href="#">PAPER 2</a></td>
+                    <td>B-UYT</td>
+                </tr>
+                <tr>
+                    <td>03 April 24</td>
+                    <td>MG UNIVERSITY</td>
+                    <td>DEGREE SEMESTER 1</td>
+                    <td>2022</td>
+                    <td>SEPTEMBER</td>
+                    <td>MCOM</td>
+                    <td>ECONOMICS</td>
+                    <td><a href="#">PAPER 2</a></td>
+                    <td>E-266</td>
+                </tr>        
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filters = {
+                university: 'ALL',
+                course: 'ALL',
+                subject: 'ALL',
+                paper: 'ALL'
+            };
+            const filterTable = () => {
+                const rows = document.querySelectorAll('#table-body tr');
+                const searchTerm = document.getElementById('search-bar').value.toLowerCase();
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    const rowText = Array.from(cells).map(cell => cell.textContent.toLowerCase()).join(' ');
+                    const showRow = Object.keys(filters).every(key => {
+                        const cellIndex = {
+                            university: 1,
+                            course: 5,
+                            subject: 6,
+                            paper: 7
+                        }[key];
+                        return filters[key] === 'ALL' || cells[cellIndex].textContent.trim().toLowerCase().includes(filters[key]);
+                    }) && rowText.includes(searchTerm);
+                    
+                    row.style.display = showRow ? '' : 'none';
+                });
+            };
+            document.querySelectorAll('.filter-section select').forEach(select => {
+                select.addEventListener('change', function() {
+                    filters[this.id] = this.value.toLowerCase();
+                    filterTable();
+                });
+            });
+            document.getElementById('show-all-clear-filter').addEventListener('click', function() {
+                document.querySelectorAll('.filter-section select').forEach(select => {
+                    select.value = 'ALL';
+                    filters[select.id] = 'ALL';
+                });
+                document.getElementById('search-bar').value = '';
+                filterTable();
+            });
+            document.getElementById('search-filter').addEventListener('click', function() {
+                filterTable();
+            });
+            document.getElementById('search-bar').addEventListener('input', function() {
+                filterTable();
+            });
+        });
+    </script>
+</body>
+</html>

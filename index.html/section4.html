@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Videos - Section 4</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+        }
+
+        header {
+            background: linear-gradient(to right, #4dd0e1, #009688);
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header .search-bar {
+            flex-grow: 1;
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        header .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            transition: border 0.3s;
+        }
+
+        header .search-bar input:focus {
+            border: 1px solid #00796b;
+            box-shadow: 0 0 10px rgba(0, 121, 107, 0.5);
+        }
+
+        header .nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        header .nav a {
+            text-decoration: none;
+            color: #ffffff;
+            padding: 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header .nav a:hover, header .nav a.active {
+            background-color: #00796b;
+            color: #ffffff;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        main {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .sidebar {
+            background: linear-gradient(to bottom, #ffffff, #e0f7fa);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: calc(100vh - 70px); /* Adjust height as needed */
+            overflow-y: auto;
+            width: 25%;
+            position: sticky;
+            top: 70px; /* Adjust as needed */
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 50%;
+            margin-left: -200px; /* Move the section to the left */
+        }
+
+        .video-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .video-item {
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            background: linear-gradient(to right, #f9f9f9, #e0e0e0);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(to right, #e0f7fa, #80deea);
+        }
+
+        .video-item img {
+            width: 120px;
+            height: 80px;
+            border-radius: 4px;
+        }
+
+        .video-item div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .video-item p {
+            margin: 0;
+        }
+
+        .video-item p:first-child {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .video-item p:last-child {
+            color: #777;
+        }
+
+        .video-player iframe {
+            width: 160%;
+            height: 300px; /* Increased height */
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .currently-playing {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            width: 50%;
+            z-index: 10;
+            top: 100px; /* Adjust as needed */
+        }
+
+        .currently-playing h2 {
+            margin-bottom: 10px;
+            color: #00796b;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .all-videos {
+            margin-top: 400px; /* Adjust according to the video player height */
+            margin-left: 200px;
+        }
+
+        .all-videos h2 {
+            margin-bottom: 10px;
+            color: #00796b;
+        }
+
+        .all-videos .video-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .all-videos .video-item {
+            flex: 1 1 calc(50% - 5px);
+            max-width: calc(50% - 5px);
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .currently-playing {
+                width: 100%;
+            }
+
+            .video-player iframe {
+                width: 100%;
+            }
+
+            .all-videos {
+                margin-left: 0;
+            }
+
+            .all-videos .video-item {
+                flex: 1 1 calc(100% - 5px);
+                max-width: calc(100% - 5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">LOGO</div>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for videos...">
+        </div>
+        <nav class="nav">
+            <a href="index.html">HOME</a>
+            <a href="section1.html">Subjects</a>
+            <a href="section2.html">Exam papers</a>
+            <a href="section3.html">Books</a>
+            <a href="#" class="active">videos</a>
+            <a href="section5.html">Contact us</a>
+    
+        </nav>
+    </header>
+    <main>
+        <aside class="sidebar">
+            <div class="new-videos">
+                <h2>New Videos</h2>
+                <div class="video-list" id="newVideos">
+                    <!-- Dynamic video items will be inserted here -->
+                </div>
+            </div>
+        </aside>
+        <section class="content">
+            <div class="currently-playing">
+                <h2 id="currentVideoTitle">Currently Playing: Video Title</h2>
+                <div class="video-player">
+                    <iframe id="videoPlayer" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+                </div>
+            </div>
+            <div class="all-videos">
+                <h2>All Videos</h2>
+                <div class="video-list" id="allVideos">
+                    <!-- Dynamic video items will be inserted here -->
+                </div>
+            </div>
+        </section>
+        <aside class="sidebar">
+            <div class="recently-watched">
+                <h2>Recently Watched</h2>
+                <div class="video-list" id="recentlyWatched">
+                    <!-- Dynamic video items will be inserted here -->
+                </div>
+            </div>
+        </aside>
+    </main>
+    <script>
+        // Array of videos
+        const videos = [
+            { title: "Video 1", tags: "tag1, tag2", thumbnail: "thumbnail1.jpg", id: "tgbNymZ7vqY" },
+            { title: "Video 2", tags: "tag2, tag3", thumbnail: "thumbnail2.jpg", id: "m7Bc3pLyij0" },
+            { title: "Video 3", tags: "tag1, tag4", thumbnail: "thumbnail3.jpg", id: "w3jLJU7DT5E" },
+            { title: "WHAT IS CASH?", tags: "CASH, CREDIT", thumbnail: "JFGLKSJGKJFDSG.jpg", id: "HFGGKJHFDGJH" },
+            { title: "WHAT CREDIT ", tags: "PHYSICS, CASH, TRADE", thumbnail: "JSDHFJHSDFKJSF.jpg", id: "JKFDBASJFHSADHGHVG" },
+            { title: "Video 3", tags: "tag1, tag4", thumbnail: "thumbnail3.jpg", id: "w3jLJU7DT5E" },
+            { title: "Video 3", tags: "tag1, tag4", thumbnail: "thumbnail3.jpg", id: "w3jLJU7DT5E" },
+            { title: "Video 3", tags: "tag1, tag4", thumbnail: "thumbnail3.jpg", id: "w3jLJU7DT5E" },
+            { title: "Video 3", tags: "tag1, tag4", thumbnail: "thumbnail3.jpg", id: "w3jLJU7DT5E" },
+            { title: "Video 3", tags: "tag1, tag4", thumbnail: "thumbnail3.jpg", id: "w3jLJU7DT5E" },
+            { title: "Video 4", tags: "tag3, tag4", thumbnail: "thumbnail4.jpg", id: "UkgK8eUdpAo" },
+        ];
+
+        // Elements
+        const searchInput = document.getElementById('searchInput');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const currentVideoTitle = document.getElementById('currentVideoTitle');
+        const newVideosContainer = document.getElementById('newVideos');
+        const allVideosContainer = document.getElementById('allVideos');
+        const recentlyWatchedContainer = document.getElementById('recentlyWatched');
+
+        // Load video function
+        function loadVideo(videoId, title) {
+            videoPlayer.src = `https://www.youtube.com/embed/${videoId}`;
+            currentVideoTitle.textContent = `Currently Playing: ${title}`;
+            addRecentlyWatched(videoId, title);
+        }
+
+        // Add recently watched video to localStorage
+        function addRecentlyWatched(videoId, title) {
+            const recentlyWatchedVideos = JSON.parse(localStorage.getItem('recentlyWatched')) || [];
+            recentlyWatchedVideos.push({ id: videoId, title });
+            localStorage.setItem('recentlyWatched', JSON.stringify(recentlyWatchedVideos));
+            renderRecentlyWatched();
+        }
+
+        // Render video list
+        function renderVideoList(container, videoList) {
+            container.innerHTML = '';
+            videoList.forEach(video => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                videoItem.innerHTML = `
+                    <img src="${video.thumbnail}" alt="Thumbnail">
+                    <div>
+                        <p>${video.title}</p>
+                        <p>${video.tags}</p>
+                    </div>
+                `;
+                videoItem.addEventListener('click', () => loadVideo(video.id, video.title));
+                container.appendChild(videoItem);
+            });
+        }
+
+        // Render recently watched videos
+        function renderRecentlyWatched() {
+            const recentlyWatchedVideos = JSON.parse(localStorage.getItem('recentlyWatched')) || [];
+            recentlyWatchedContainer.innerHTML = '';
+            recentlyWatchedVideos.slice(-3).forEach(video => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                videoItem.innerHTML = `
+                    <img src="thumbnail.jpg" alt="Thumbnail">
+                    <div>
+                        <p>${video.title}</p>
+                        <p>Recently Watched</p>
+                    </div>
+                `;
+                videoItem.addEventListener('click', () => loadVideo(video.id, video.title));
+                recentlyWatchedContainer.appendChild(videoItem);
+            });
+        }
+
+        // Search functionality
+        searchInput.addEventListener('input', (event) => {
+            const query = event.target.value.toLowerCase();
+            const filteredVideos = videos.filter(video =>
+                video.title.toLowerCase().includes(query) || video.tags.toLowerCase().includes(query)
+            );
+            renderVideoList(allVideosContainer, filteredVideos);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Limit the number of new videos displayed to 5
+            renderVideoList(newVideosContainer, videos.slice(0, 6));
+            renderVideoList(allVideosContainer, videos);
+            renderRecentlyWatched();
+        });
+    </script>
+</body>
+</html>
